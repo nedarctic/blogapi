@@ -14,3 +14,5 @@ RUN pip install pipenv && pipenv install --system
 
 # Copy project
 COPY . /code/
+
+ENTRYPOINT [ "gunicorn", "core.wsgi", "-b", "0.0.0.0:8000"]
