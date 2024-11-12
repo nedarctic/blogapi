@@ -4,6 +4,7 @@ FROM python:3.12
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV DJANGO_SETTINGS_MODULE=blogapi_project.settings
 
 # Set work directory
 WORKDIR /code
@@ -15,4 +16,5 @@ RUN pip install pipenv && pipenv install --system
 # Copy project
 COPY . /code/
 
-ENTRYPOINT [ "gunicorn", "core.wsgi", "-b", "0.0.0.0:8000"]
+# Set entrypoint for Gunicorn
+ENTRYPOINT [ "gunicorn", "blogapi_project.wsgi:application", "-b", "0.0.0.0:8000" ]
